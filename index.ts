@@ -45,12 +45,6 @@ export const authPlugin = fastifyPlugin<Options>(
       },
     );
 
-    await fastify.register(jwt, {
-      secret: fastify.config.JWT_SECRET,
-    });
-
-    fastify.decorateRequest("beta", false);
-
     fastify.addHook<RouteGenericInterface, { checkAuthentication?: boolean }>(
       "onRoute",
       async (routeOptions) => {
