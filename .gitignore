@@ -154,3 +154,6 @@ dev/.datastore/*
 
 # nuxt
 .output
+
+pnpm-lock.yaml
+package-lock.json
