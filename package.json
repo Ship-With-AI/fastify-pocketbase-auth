@@ -8,7 +8,7 @@
     "build": "tsc",
     "lint": "biome check .",
     "check:types": "tsc --noEmit",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest run test/*.ts"
   },
   "keywords": [],
   "author": "",
@@ -16,10 +16,12 @@
   "packageManager": "pnpm@10.12.4",
   "devDependencies": {
     "@biomejs/biome": "2.2.0",
+    "@types/node": "^24.3.0",
     "fastify": "^5.5.0",
     "fastify-tsconfig": "^3.0.0",
     "pocketbase": "^0.26.2",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
   },
   "dependencies": {
     "fastify-plugin": "^5.0.1"
