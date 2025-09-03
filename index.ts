@@ -1,36 +1,32 @@
 import type {
   FastifyReply,
   FastifyRequest,
-  RouteGenericInterface,
   onRequestHookHandler,
+  RouteGenericInterface,
 } from "fastify";
 import fastifyPlugin from "fastify-plugin";
-import PocketBase, { RecordService } from "pocketbase";
+import PocketBase, { type RecordService } from "pocketbase";
 
 interface Options {
-  pocketbaseUrl: string
-  superuserEmail: string
-  superuserPassword: string
-  authCollectionName?: string
+  pocketbaseUrl: string;
+  superuserEmail: string;
+  superuserPassword: string;
+  authCollectionName?: string;
 }
 
 export const authPlugin = fastifyPlugin<Options>(
   async (fastify, opts) => {
-    const authCollectionName = opts.authCollectionName ?? 'users'
+    const authCollectionName = opts.authCollectionName ?? "users";
     const pb = new PocketBase(opts.pocketbaseUrl);
     const authCheck = new PocketBase(opts.pocketbaseUrl);
 
     await pb
       .collection("_superusers")
-      .authWithPassword(
-        opts.superuserEmail,
-        opts.superuserPassword,
-        {
-          // This will trigger auto refresh or auto reauthentication in case
-          // the token has expired or is going to expire in the next 30 minutes.
-          autoRefreshThreshold: 30 * 60,
-        },
-      );
+      .authWithPassword(opts.superuserEmail, opts.superuserPassword, {
+        // This will trigger auto refresh or auto reauthentication in case
+        // the token has expired or is going to expire in the next 30 minutes.
+        autoRefreshThreshold: 30 * 60,
+      });
     pb.autoCancellation(false);
 
     fastify.decorate("authCollection", pb.collection(authCollectionName));
@@ -44,12 +40,6 @@ export const authPlugin = fastifyPlugin<Options>(
         return record?.id;
       },
     );
-
-    await fastify.register(jwt, {
-      secret: fastify.config.JWT_SECRET,
-    });
-
-    fastify.decorateRequest("beta", false);
 
     fastify.addHook<RouteGenericInterface, { checkAuthentication?: boolean }>(
       "onRoute",
@@ -83,13 +73,18 @@ export const authPlugin = fastifyPlugin<Options>(
 
 declare module "fastify" {
   interface FastifyInstance {
-    authCollection: RecordService<{ id: string; email: string; password: string }>;
-    authenticate: (
-      user: { id: string; email: string; password: string },
-    ) => Promise<string | undefined>;
+    authCollection: RecordService<{
+      id: string;
+      email: string;
+      password: string;
+    }>;
+    authenticate: (user: {
+      id: string;
+      email: string;
+      password: string;
+    }) => Promise<string | undefined>;
   }
   interface FastifyRequest {
-    getUserId: () => string | Promise<string>
+    getUserId: () => string | Promise<string>;
   }
 }
-
