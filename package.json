@@ -1,6 +1,6 @@
 {
   "name": "pocketbase",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "type": "module",
   "main": "index.js",
@@ -8,7 +8,8 @@
     "build": "tsc",
     "lint": "biome check .",
     "check:types": "tsc --noEmit",
-    "test": "vitest run test/*.ts"
+    "test": "vitest run test/*.ts",
+    "changeset": "changeset"
   },
   "keywords": [],
   "author": "",
@@ -16,10 +17,11 @@
   "packageManager": "pnpm@10.12.4",
   "devDependencies": {
     "@biomejs/biome": "2.2.0",
+    "@changesets/cli": "^2.29.7",
     "@types/node": "^24.3.0",
     "fastify": "^5.5.0",
     "fastify-tsconfig": "^3.0.0",
-    "pocketbase": "^0.26.2",
+    "pocketbase": "^1.0.1",
     "typescript": "^5.9.2",
     "vitest": "^3.2.4"
   },
@@ -28,6 +30,6 @@
   },
   "peerDependencies": {
     "fastify": "^5.0.0",
-    "pocketbase": "^0.26.0"
+    "pocketbase": "^1.0.1"
   }
 }
