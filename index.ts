@@ -79,7 +79,6 @@ declare module "fastify" {
       password: string;
     }>;
     authenticate: (user: {
-      id: string;
       email: string;
       password: string;
     }) => Promise<string | undefined>;
