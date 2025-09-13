@@ -22,7 +22,7 @@
     "@types/node": "^24.3.0",
     "fastify": "^5.5.0",
     "fastify-tsconfig": "^3.0.0",
-    "pocketbase": "^0.0.2",
+    "pocketbase": "^0.26.2",
     "typescript": "^5.9.2",
     "vitest": "^3.2.4"
   },
@@ -31,6 +31,6 @@
   },
   "peerDependencies": {
     "fastify": "^5.0.0",
-    "pocketbase": "^0.0.2"
+    "pocketbase": "^0.26.2"
   }
 }
